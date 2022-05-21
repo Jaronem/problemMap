@@ -1,8 +1,10 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import Globe from "react-globe.gl";
+import { useNavigate } from "react-router-dom";
 
 export default function Earth(props) {
   const globeEl = useRef();
+  const navigate = useNavigate();
   const [countries, setCountries] = useState({ features: [] });
   const [hover, setHover] = useState();
 
@@ -22,7 +24,7 @@ export default function Earth(props) {
 
   const clickHandler = useCallback((e) => {
     if (e.type !== "Feature") return;
-    console.log(e);
+    navigate(`country/${e.properties.NAME}`);
   }, []);
 
   return (
